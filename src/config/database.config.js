@@ -1,11 +1,12 @@
-import pg from "pg";
-import { config } from "dotenv";
-config();
+import pg from "pg"
+import dotenv from "dotenv"
 
-const dbName = "boardcamp";
+dotenv.config()
 
-const connection = new pg.Pool({
-  connectionString: process.env.DATABASE_URL,
-  database: dbName,
-});
-export default connection;
+const { Pool } = pg
+
+const configDatabase = {
+    connectionString: process.env.DATABASE_URL
+}
+
+export const db = new Pool(configDatabase)
