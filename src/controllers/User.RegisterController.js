@@ -8,21 +8,8 @@ export const create = async (req , res)=>{
     if (password !== confirmPassword) return res.status(400).send({message:"passwords aren't equals"})
     
     try{    
-        
-        const user = await registerService.create(req.body)
-        console.log("USER",user)
-        if(!user) return res.status(400).send("Error creating user")
-        if(user.rows[0].length){
-            const {name, id , email} = user.rows[0]
-            res.status(201).send({
-                message: "user created secessfully",
-                id: id,
-                name:name,
-                email:email,
-            })
-        }
-
-      
+         await registerService.create(req.body)
+         res.status(201).send("user created secessfully") 
     }catch(err){
         if (err.status === 409)  return res.status(409).send({ message: "email already registered, please try another email" })
         res.status(500).send(err.message)
@@ -37,7 +24,7 @@ export const findAllUsers = async (req, res) =>{
 
         if(users.rows[0].length === 0 ) return res.status(400).json({message:"There are no registered users"})
     
-        res.send(users.rows[0])
+        res.send(users.rows)
     
     }catch(err){
         console.log(err)

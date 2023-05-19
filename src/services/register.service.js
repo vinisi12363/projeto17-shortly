@@ -3,17 +3,18 @@ import {db} from '../config/database.config.js'
 
 
 const create = async (body) => {
-    console.log ("BODY", body)
+
+    const {name , email, password } = body;
     try {
-        const {name , email, password } = body
-        await db.query(`INSERT INTO users (
-               name , 
+       
+        const result = await db.query(`INSERT INTO users (
+               name, 
                email, 
                password
             ) VALUES ( $1, $2, $3);` 
             , [name, email , password])
    
-        return 
+        return  result
     } catch (err) {
         return err.message 
     }
