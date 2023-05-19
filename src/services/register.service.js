@@ -5,7 +5,7 @@ import bcrypt  from 'bcrypt'
 
 const create = async (body) => {
 
-    const {name , email, password } = body;
+    const {name , email, password } = body
     
     
 
