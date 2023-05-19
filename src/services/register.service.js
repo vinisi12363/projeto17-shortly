@@ -1,18 +1,23 @@
 
 import {db} from '../config/database.config.js'
+import bcrypt  from 'bcrypt'
 
 
 const create = async (body) => {
 
     const {name , email, password } = body;
+    
+    
+
     try {
-       
+        const HashedPassword = await bcrypt.hash(password , 10)
+
         const result = await db.query(`INSERT INTO users (
                name, 
                email, 
                password
             ) VALUES ( $1, $2, $3);` 
-            , [name, email , password])
+            , [name, email , HashedPassword])
    
         return  result
     } catch (err) {

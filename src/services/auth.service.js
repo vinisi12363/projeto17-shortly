@@ -1,6 +1,5 @@
-import  User from '../Model/User.js'
 import  jwt  from 'jsonwebtoken'
-
+import {db} from '../config/database.config.js'
 
 const findEmail = async (email) => {
     try {
@@ -26,4 +25,4 @@ const updateUserToken = async (email, token) => {
 
 const generateWebToken = (id) => jwt.sign({id: id}, process.env.SECRET_JWT, {expiresIn: 24*60*60*1000})
 
-export default {findUser , generateWebToken , findEmail, updateUserToken}
+export default { generateWebToken , findEmail, updateUserToken}
