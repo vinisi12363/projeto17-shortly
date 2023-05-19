@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt'
 
 export const login = async (req, res) =>{
     const {email , password} = req.body
-    if(!email || !password) return res.status(422).send({message:"invalid email or password"})
+    if(!email || !password) return res.status(422).send("invalid email or password")
 
     try{
         const user = await authService.findUser (email)
