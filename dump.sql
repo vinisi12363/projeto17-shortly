@@ -206,3 +206,6 @@ ALTER DEFAULT PRIVILEGES FOR ROLE postgres GRANT ALL ON TABLES  TO shortlydbuser
 -- PostgreSQL database dump complete
 --
 
+CREATE USER shortlydbuser WITH PASSWORD 'senha_ultra_secreta_do_usuario_shortlydbuser';
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO shortlydbuser;
+GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO shortlydbuser;

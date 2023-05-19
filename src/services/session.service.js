@@ -1,7 +1,14 @@
-import  User from '../Model/User.js'
+import { db } from "../config/database.config"
 
 
-export const findUserID = (id) =>  User.findOne({_id:id}) 
+export const findUserID = async (id) =>  {
+    try{
+        const result = await db.query (`SELECT * from users WHERE id=$1`, id)
+        return result
+    }catch(err){
+        return err.message
+    }
+} 
 
 
 export default {findUserID}
