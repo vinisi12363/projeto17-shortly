@@ -7,8 +7,11 @@ export const create = async (req , res)=>{
     if(!name ||  !email || !password) return res.status(400).send({message:"all the fields are required"})
     if (password !== confirmPassword) return res.status(400).send({message:"passwords aren't equals"})
     
+    const lowerEmail = email.toLowerCase()
+    console.log ('email', lowerEmail)
+
     try{    
-         await registerService.create(req.body)
+         await registerService.create({name:name, email:lowerEmail, password:password, confirmPassword:confirmPassword})
          res.status(201).send("user created secessfully") 
     }catch(err){
         if (err.status === 409)  return res.status(409).send({ message: "email already registered, please try another email" })

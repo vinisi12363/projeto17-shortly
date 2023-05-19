@@ -4,9 +4,10 @@ import bcrypt from 'bcrypt'
 export const login = async (req, res) =>{
     const {email , password} = req.body
     if(!email || !password) return res.status(422).send("invalid email or password")
-
+    const lowerEmail = email.toLowerCase()
+    console.log ('email', lowerEmail)
     try{
-        const user = await authService.findEmail (email)
+        const user = await authService.findEmail (lowerEmail)
         const userIsValid =  await bcrypt.compare(password , user.rows[0].password)
         
         if (!user) return res.status(404).send({message:"user or password are incorrect "})
