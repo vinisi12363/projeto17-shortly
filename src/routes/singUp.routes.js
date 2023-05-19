@@ -5,7 +5,7 @@ import {create , findAllUsers} from '../controllers/User.RegisterController.js'
 
 const router = express.Router()
 
-router.post('/signup', /*validateRegister(RegisterSchema),*/  create);
+router.post('/singup', validateRegister(RegisterSchema),  create);
 router.get('/singup', findAllUsers)
 
 export default router

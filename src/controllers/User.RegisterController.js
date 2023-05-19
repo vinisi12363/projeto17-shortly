@@ -2,24 +2,30 @@ import registerService from '../services/register.service.js'
 import bcrypt from 'bcrypt'
 
 export const create = async (req , res)=>{
-    const {name, email, password} = req.body
+    const {name, email, password, confirmPassword} = req.body
 
     if(!name ||  !email || !password) return res.status(400).send({message:"all the fields are required"})
-
+    if (password !== confirmPassword) return res.status(400).send({message:"passwords aren't equals"})
+    
     try{    
+        
         const user = await registerService.create(req.body)
-        const [name, id , email] = user.rows[0]
-       
+        console.log("USER",user)
         if(!user) return res.status(400).send("Error creating user")
-        res.status(201).send({
-            message: "user created secessfully",
-            id: id,
-            name:name,
-            email:email,
-        })
+        if(user.rows[0].length){
+            const {name, id , email} = user.rows[0]
+            res.status(201).send({
+                message: "user created secessfully",
+                id: id,
+                name:name,
+                email:email,
+            })
+        }
+
+      
     }catch(err){
         if (err.status === 409)  return res.status(409).send({ message: "email already registered, please try another email" })
-        res.status(500).json({message:err.message})
+        res.status(500).send(err.message)
     }
 
 }
@@ -27,14 +33,15 @@ export const create = async (req , res)=>{
 export const findAllUsers = async (req, res) =>{
 
     try{
-        const users = await registerService.findAll()
+         const users = await registerService.getAll()
 
-        if(users.length === 0 ) return res.status(400).json({message:"There are no registered users"})
+        if(users.rows[0].length === 0 ) return res.status(400).json({message:"There are no registered users"})
     
-        res.send(users)
+        res.send(users.rows[0])
     
     }catch(err){
-        res.status(500).send(err.message))
+        console.log(err)
+        res.status(500).send(err.message)
     }
    
 }
