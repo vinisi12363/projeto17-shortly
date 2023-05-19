@@ -1,7 +1,6 @@
 import  User from '../Model/User.js'
 import  jwt  from 'jsonwebtoken'
 
-const findUser = (email) => User.findOne({email:email}).select("+password ")
 
 const findEmail = async (email) => {
     try {
