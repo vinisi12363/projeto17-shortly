@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 15.2
--- Dumped by pg_dump version 15.2
+-- Dumped from database version 14.7 (Ubuntu 14.7-0ubuntu0.22.04.1)
+-- Dumped by pg_dump version 14.7 (Ubuntu 14.7-0ubuntu0.22.04.1)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -109,31 +109,35 @@ ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_
 -- Data for Name: urls; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO public.urls VALUES (2, 'hGbpt5', 'https://www.figma.com/file/DWg9233KR2GS6RLvfZRwyd/Shortly?type=design&node-id=1-2&t=VGKJ6JmBLCtaHMdK-0', 19, 1, '2023-05-18 19:34:54.852723');
-INSERT INTO public.urls VALUES (1, 'n5eIPT', 'http://localhost:5173/home', 32, 1, '2023-05-18 15:04:28.988209');
-INSERT INTO public.urls VALUES (3, '5qTXt8', 'https://scontent.fcgh10-1.fna.fbcdn.net/v/t39.30808-6/296381730_383236407247843_4149487714577975930_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=09cbfe&_nc_eui2=AeFEjPMWbRC_-iXv91XJCiHrj5KEHyD-BXCPkoQfIP4FcNjvcRbwRDtmjAYwHxZqGhAH2q3xNh6vMtVh2hj2Bg5l&_nc_ohc=ykhvKq8-2e0AX9r4cSM&_nc_ht=scontent.fcgh10-1.fna&oh=00_AfBk8HjUdeyL8i3ZF22VRpvdam5fppTA8gH-Q503YOSEmg&oe=646ADC0E', 2, 1, '2023-05-18 22:04:55.94238');
+INSERT INTO public.urls VALUES (1, 'ZPDxTggB', 'https://www.google.com.br', NULL, NULL, '2023-05-19 14:32:49.778165');
+INSERT INTO public.urls VALUES (2, '7dAzE6zw', 'https://www.google.com.br', NULL, NULL, '2023-05-19 14:45:06.94997');
 
 
 --
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO public.users VALUES (1, 'Thomas Andrioli Leick', 'thomasaleick@gmail.com', '$2b$10$v0icviy/gTSVgVF7owNci.WTR.WaqlJD8wgUFBx0CC7AzT7Emkdza', '2023-05-16 12:22:15.708566', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjg0NDY2NTg0LCJleHAiOjE3NzA4NjY1ODR9.yFx3XAquzYZr9CL6GlmvEBBsQgBbOutsBSFQb-S1mVM');
-INSERT INTO public.users VALUES (2, 'Thomas Andrioli Leick', '12thomasaleick@gmail.com', '$2b$10$cMrOIJWCXYTH8XA2gDBN8OvaR11WD12y10AdJtzGXZA8S7DDr2Vj2', '2023-05-17 20:12:44.059986', NULL);
+INSERT INTO public.users VALUES (1, 'teste', '0teste@gmail.com', '123456', '2023-05-18 00:08:45.850389', NULL);
+INSERT INTO public.users VALUES (4, 'Vini', 'vinicius@vinicius.com', '123456', '2023-05-18 22:59:39.271465', NULL);
+INSERT INTO public.users VALUES (6, 'Vinicius Vieira', 'vinicius@gmail.com', '123456', '2023-05-18 23:03:43.804093', NULL);
+INSERT INTO public.users VALUES (7, 'Pablo Vieira', 'pablo@gmail.com', '123456', '2023-05-18 23:06:50.227052', NULL);
+INSERT INTO public.users VALUES (2, 'pedro', 'pedro@gmail.com', '123456', '2023-05-18 22:51:06.996629', 'abcdauhquas2344$asdajisd');
+INSERT INTO public.users VALUES (8, 'teste hash Vieira', 'hash@gmail.com', '$2b$10$U8hfnIpUP5at47QDylmYKuwMMKfut3vqD5NwE/oNVsU/EI8lXjhFm', '2023-05-19 00:55:10.230368', NULL);
+INSERT INTO public.users VALUES (9, 'Sophia Macedo', 'MariaEduarda88@gmail.com', '$2b$10$enDXwH7AZwOZ7d2Ql8FY..Y13GKcmveb2GIKzkfA3x2yOtVhJs2Zi', '2023-05-19 15:41:41.894041', NULL);
 
 
 --
 -- Name: urls_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.urls_id_seq', 6, true);
+SELECT pg_catalog.setval('public.urls_id_seq', 2, true);
 
 
 --
 -- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.users_id_seq', 2, true);
+SELECT pg_catalog.setval('public.users_id_seq', 9, true);
 
 
 --
@@ -201,7 +205,14 @@ GRANT ALL ON TABLE public.users TO shortlydbuser;
 -- Name: SEQUENCE users_id_seq; Type: ACL; Schema: public; Owner: -
 --
 
-GRANT ALL ON SEQUENCE public.users_id_seq TO shortlydbuser;
+GRANT  ALL  ON SEQUENCE public.users_id_seq TO shortlydbuser;
+
+
+--
+-- Name: DEFAULT PRIVILEGES FOR TABLES; Type: DEFAULT ACL; Schema: -; Owner: -
+--
+
+ALTER DEFAULT PRIVILEGES FOR ROLE postgres GRANT ALL ON TABLES  TO shortlydbuser;
 
 
 --
