@@ -15,19 +15,39 @@ const create = async (body) => {
 
 const findUrlById = async (id) => {
   try {
-    const result = await db.query(`SELECT * FROM urls WHERE id = $1;`, [id]);
+    const result = await db.query(`SELECT id, "shortUrl" , url  FROM urls WHERE id = $1;`, [id]);
     return result;
   } catch (err) {
     return err.message;
   }
 };
+const findShortlyUrl = async (shortUrl)=>{
+  try {
+    const result = await db.query(`SELECT id, url FROM urls WHERE id = $1;`, [id]);
+    return result;
+  }catch (err){
+    return "Error in findShortlyUrl: " + err.message;
+  }
+
+}
+
+const updateVisitCount = async (id)=>{
+  try {
+    const result = await db.query(`UPDATE urls SET "visitCount" = "visitCount" + 1 WHERE id = $1;`, [id]);
+
+    return result;
+  }catch (err){
+    return "Error in visitcount Increment: " + err.message;
+  }
+
+}
 const findUrlShorted = async (id)=>{
   try {
     const result = await db.query(`SELECT id, "shortUrl" FROM urls WHERE id = $1;`, [id]);
     return result;
   }catch (err){
-    return "Error in findShortlyUrl: " + err.message;
+    return "Error in findUrlShorted: " + err.message;
   }
 }
 
-export default { create, findUrlById, findUrlShorted };
+export default { create, findUrlById, findUrlShorted ,findShortlyUrl, updateVisitCount };

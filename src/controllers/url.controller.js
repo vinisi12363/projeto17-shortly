@@ -26,7 +26,7 @@ export const findUrlById = async (req, res) =>{
 
         if(!result.rows.length) return res.status(400).json({message:"There are no registered URLS with this ID"})
     
-        res.status(200).send(users.rows[0])
+        res.status(200).send(result.rows[0])
     
     }catch(err){
         console.log(err)
@@ -35,3 +35,20 @@ export const findUrlById = async (req, res) =>{
    
 }
 
+
+export const getShortlyUrl = async  (res, req)=>{
+    const {shortUrl} =  req.params
+    try{
+        const result = await urlService.findShortlyUrl(shortUrl)
+
+        if(!result.rows.length) return res.status(400).json({message:"There are no registered URLS with this ID"})
+    
+        res.redirect(result.rows[0].url)
+    
+    }catch(err){
+        console.log(err)
+        res.status(500).send(err.message)
+    }
+
+
+} 
