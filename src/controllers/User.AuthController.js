@@ -18,7 +18,7 @@ export const login = async (req, res) =>{
 
         const token = authService.generateWebToken(user.rows[0].id)
         authService.updateUserToken(user.rows[0].email, token);
-        if(userIsValid) return res.status(200).send({token:token })
+        if(userIsValid) return res.status(200).send({token:token})
        
     }catch(err){
         console.log("erro na function login:", err.message)

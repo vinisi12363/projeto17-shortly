@@ -14,8 +14,8 @@ const findEmail = async (email) => {
 const updateUserToken = async (email, token) => {
     try {
         const result = await db.query(`UPDATE users SET 
-        "refreshToken"  = '$1'
-         WHERE email = '$2'
+        "refreshToken"  = $1
+         WHERE email = $2
         `,[token,email])
         return result
     } catch (err) {
