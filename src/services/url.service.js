@@ -58,4 +58,25 @@ const deleteUrlById = async (id) => {
   }
 };
 
-export default { create, findUrlById, findUrlShortedById ,findShortlyUrl, updateVisitCount, deleteUrlById };
+
+const ranking = async ()=>{
+
+  try {
+     const result = await db.query(`SELECT 
+     users.id, 
+     users.name, 
+     COUNT(urls.id) AS "linksCount",
+     COALESCE(SUM(urls."visitCount"), 0) AS "visitCount" FROM users LEFT  JOIN urls ON users.id = "urls.userId" 
+     GROUP BY users.id 
+     ORDER BY "visitCount" DESC 
+     LIMIT 10;`)
+
+     return result;
+  }catch (err){
+    return err.message;
+  }
+
+
+}
+
+export default { ranking ,create, findUrlById, findUrlShortedById ,findShortlyUrl, updateVisitCount, deleteUrlById };
