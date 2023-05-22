@@ -1,6 +1,6 @@
 
 export default function validateRegister(schema) {
- 
+    
     return (req, res, next) => {
         const { email, password, name, confirmPassword } = req.body
            
