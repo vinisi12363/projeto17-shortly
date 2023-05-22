@@ -23,7 +23,7 @@ const findUrlById = async (id) => {
 };
 const findShortlyUrl = async (shortUrl)=>{
   try {
-    const result = await db.query(`SELECT id, url FROM urls WHERE "shortUrl" = $1;`, [shortUrl]);
+    const result = await db.query(`SELECT url FROM urls WHERE "shortUrl" = $1;`, [shortUrl]);
     return result;
   }catch (err){
     return "Error in findShortlyUrl: " + err.message;
@@ -41,9 +41,9 @@ const updateVisitCount = async (id)=>{
   }
 
 }
-const findUrlShorted = async (id)=>{
+const findUrlShortedById = async (id)=>{
   try {
-    const result = await db.query(`SELECT id, "shortUrl" FROM urls WHERE id = $1 RETURNING url;`, [id]);
+    const result = await db.query(`SELECT url "shortUrl" FROM urls WHERE id = $1;`, [id]);
     return result;
   }catch (err){
     return "Error in findUrlShorted: " + err.message;
@@ -58,4 +58,4 @@ const deleteUrlById = async (id) => {
   }
 };
 
-export default { create, findUrlById, findUrlShorted ,findShortlyUrl, updateVisitCount, deleteUrlById };
+export default { create, findUrlById, findUrlShortedById ,findShortlyUrl, updateVisitCount, deleteUrlById };
