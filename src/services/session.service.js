@@ -1,4 +1,4 @@
-import { db } from "../config/database.config"
+import { db } from "../config/database.config.js"
 
 
 export const findUserID = async (id) =>  {

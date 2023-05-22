@@ -23,7 +23,7 @@ const findUrlById = async (id) => {
 };
 const findShortlyUrl = async (shortUrl)=>{
   try {
-    const result = await db.query(`SELECT url FROM urls WHERE "shortUrl" = $1;`, [shortUrl]);
+    const result = await db.query(`SELECT id , url FROM urls WHERE "shortUrl" = $1;`, [shortUrl]);
     return result;
   }catch (err){
     return "Error in findShortlyUrl: " + err.message;
@@ -33,7 +33,8 @@ const findShortlyUrl = async (shortUrl)=>{
 
 const updateVisitCount = async (id)=>{
   try {
-    const result = await db.query(`UPDATE urls SET "visitCount" = "visitCount" + 1 WHERE id = $1;`, [id]);
+    const result = await db.query(`UPDATE urls SET "visitCount" = COALESCE("visitCount", 0) + 1 WHERE id = $1;
+    `, [id]);
 
     return result;
   }catch (err){
