@@ -21,12 +21,13 @@ export const create = async (req , res)=>{
 
 export const findUrlById = async (req, res) =>{
     const {id} = req.params
+    console.log ("id", id )
     try{
          const result = await urlService.findUrlById(id)
 
-        if(!result.rows.length) return res.status(400).json({message:"There are no registered URLS with this ID"})
+        if(!result.rows[0].length) return res.status(400).json({message:"There are no registered URLS with this ID"})
     
-        res.status(200).send(result.rows[0])
+        res.status(200).send(result)
     
     }catch(err){
         console.log(err)
@@ -37,14 +38,19 @@ export const findUrlById = async (req, res) =>{
 
 
 export const getShortlyUrl = async  (res, req)=>{
-    const {shortUrl} =  req.params
+    const {sUrl} =  req.params
+    console.log('req params', sUrl)
     try{
-        const result = await urlService.findShortlyUrl(shortUrl)
+        const result = await urlService.findShortlyUrl(sUrl)
 
-        if(!result.rows.length) return res.status(400).json({message:"There are no registered URLS with this ID"})
+        if(result) {
+            res.redirect(result.rows[0].url)
+        } 
+        else {
+            return res.status(404).json({message:"There are no registered URLS with this shortUrl"})
     
-        res.redirect(result.rows[0].url)
-    
+        }
+       
     }catch(err){
         console.log(err)
         res.status(500).send(err.message)
@@ -52,3 +58,20 @@ export const getShortlyUrl = async  (res, req)=>{
 
 
 } 
+
+export const  deleteUrlById  = async (req  , res ) => {
+    const {id} = req.params;
+
+    try{
+        const result = await urlService.deleteUrlById(id)
+        if (result) {
+            res.status(200).send("url deleted")
+        }    else {
+            return res.status(400).json({message:"There are no registered URLS with this ID"})
+        }
+    }catch(err){
+        console.log(err)
+        res.status(500).send(err.message)
+    }
+
+}
