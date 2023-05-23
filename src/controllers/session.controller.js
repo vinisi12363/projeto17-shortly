@@ -1,23 +1,18 @@
 import Jwt from 'jsonwebtoken'
+import sessionService from '../services/session.service.js';
 
 
 
 export const getUserUrls = async (req, res) => {
-    const {authorization} = req.headers
-    const parts = authorization.split(" ")
-    const [schema , token] = parts    
-    
+  const {id} =  res.locals;
       try {
-        
-        Jwt.verify(token, process.env.SECRET_JWT , async (err, decoded )=>{
-          if(err) return res.status(401).send({message:"Token invalid"})
-          if (decoded) {
-               const userIdent = decoded.id
-               console.log(userIdent)
-      
-          }
-        })
-  
-      }catch(err){res.status(500).send("ERRO NO GET MOVEMENT", err)}
+            const result = await sessionService.getUserByIdWithUrls(id)
+            if(result.rowsCount >0){
+              console.log(result.rows[0])
+            }
+            else{
+              res.status(400).send("following user aren't posted a url to short...", id)
+            }              
+          }catch(err){res.status(500).send("ERRO NO GET MOVEMENT", err)}
   }
   
