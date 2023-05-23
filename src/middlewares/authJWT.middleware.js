@@ -12,11 +12,11 @@ const verifyJWT = (req, res, next) => {
 
   verify(token, process.env.SECRET_JWT, (err, decoded) => {
     if (err) return res.sendStatus(403); //invalid token
-    console.log('DECODED' , decoded)
+    
     res.locals = {
       id: decoded.id
     };
-    console.log("res.locals", res.locals)
+   
     next();
   });
 };
