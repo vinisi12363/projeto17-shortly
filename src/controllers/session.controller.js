@@ -14,10 +14,6 @@ export const getUserUrls = async (req, res) => {
           if (decoded) {
                const userIdent = decoded.id
                console.log(userIdent)
-             //  const movement =  await getUserMovement(userIdent)
-
-             //  if (!movement) return res.send([])
-              // res.status(201).send()
       
           }
         })

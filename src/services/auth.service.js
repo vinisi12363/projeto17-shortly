@@ -3,7 +3,7 @@ import {db} from '../config/database.config.js'
 
 const findEmail = async (email) => {
     try {
-        const result = await db.query(`SELECT email, password FROM users WHERE email = $1;`,[email])
+        const result = await db.query(`SELECT id, email, password FROM users WHERE email = $1;`,[email])
         return result
     } catch (err) {
         return err.message 

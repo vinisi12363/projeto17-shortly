@@ -1,11 +1,10 @@
 import { db } from '../config/database.config.js';
 import { nanoid } from 'nanoid';
 
-const create = async (body) => {
-  const { url } = body;
-  const shortUrl = nanoid(8 , url);
+const create = async (url,userId) => {
+  const shortUrl = nanoid(8);
   try {
-    const result = await db.query(`INSERT INTO urls (url, "shortUrl") VALUES ($1, $2) RETURNING id, "shortUrl";`, [url, shortUrl]);
+    const result = await db.query(`INSERT INTO urls (url, "shortUrl", "userId") VALUES ($1, $2,$3) RETURNING id, "shortUrl";`, [url, shortUrl,userId]);
 
     return result;
   } catch (err) {
