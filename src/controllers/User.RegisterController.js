@@ -24,14 +24,18 @@ export const create = async (req, res) => {
           .send({ message: "Email already registered. Please try another email." });
       }
   
-      await registerService.create({
+     const result = await registerService.create({
         name: name,
         email: lowerEmail,
         password: password,
         confirmPassword: confirmPassword,
       });
-  
-      res.status(201).send("User created successfully.");
+      if (result){
+        res.status(201).send("User created successfully.")
+      }
+      else {
+        res.status(400).send("an error ocurred during user register")
+      }
     } catch (err) {
       res.status(500).send(err.message);
     }

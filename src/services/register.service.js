@@ -16,7 +16,7 @@ const create = async (body) => {
                name, 
                email, 
                password
-            ) VALUES ( $1, $2, $3);` 
+            ) VALUES ( $1, $2, $3) RETURNING id;` 
             , [name, email , HashedPassword])
    
         return  result
